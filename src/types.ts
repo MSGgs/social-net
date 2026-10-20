@@ -4,7 +4,7 @@ export interface User {
   id: ID;
   name: string;
   username: string;
-  avatar: string;
+  avatar?: string;
   phone?: string;
   bio?: string;
   online?: boolean;

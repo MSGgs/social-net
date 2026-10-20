@@ -1,14 +1,10 @@
 import type { Chat, Post, Settings, Story, User } from '../types';
+import { avatar, photo, video } from './media';
 
 const now = Date.now();
 const min = 60_000;
 const hour = 60 * min;
 const day = 24 * hour;
-
-const avatar = (n: number) => `https://i.pravatar.cc/200?img=${n}`;
-const photo = (seed: string, w = 720, h = 960) => `https://picsum.photos/seed/${seed}/${w}/${h}`;
-const video = (name: string) =>
-  `https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/${name}.mp4`;
 
 export const ME_ID = 'me';
 

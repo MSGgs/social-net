@@ -12,6 +12,7 @@ import {
   initialSettings,
   initialStories,
 } from '../data/mock';
+import { avatarFor, groupCover } from '../data/media';
 import { uid } from '../utils/format';
 
 interface Toast {
@@ -211,7 +212,7 @@ export const useStore = create<State>()(
             name,
             phone,
             username: name.toLowerCase().replace(/\s+/g, '.'),
-            avatar: `https://i.pravatar.cc/200?u=${encodeURIComponent(phone)}`,
+            avatar: avatarFor(phone),
             lastSeen: Date.now() - 3_600_000,
           };
           set((s) => ({ users: { ...s.users, [id]: user }, contactIds: [...s.contactIds, id] }));
@@ -239,7 +240,7 @@ export const useStore = create<State>()(
             id,
             type: 'group',
             title,
-            avatar: `https://picsum.photos/seed/${id}/200/200`,
+            avatar: groupCover(id),
             memberIds: [ME_ID, ...memberIds],
             unread: 0,
             messages: [{ id: uid(), authorId: ME_ID, text: `Группа «${title}» создана`, createdAt: Date.now(), status: 'read' }],
@@ -292,8 +293,20 @@ export const useStore = create<State>()(
       name: 'volna-store',
       version: 1,
       storage: createJSONStorage(() => ({
-        getItem: (k) => localStorage.getItem(k),
-        removeItem: (k) => localStorage.removeItem(k),
+        getItem: (k) => {
+          try {
+            return localStorage.getItem(k);
+          } catch {
+            return null;
+          }
+        },
+        removeItem: (k) => {
+          try {
+            localStorage.removeItem(k);
+          } catch {
+            // хранилище недоступно (приватный режим) — нечего удалять
+          }
+        },
         setItem: (k, v) => {
           // фото хранятся как data URL — при переполнении квоты не роняем приложение
           try {
