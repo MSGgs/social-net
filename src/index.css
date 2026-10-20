@@ -13,13 +13,38 @@
   --bubble-out-meta: #4fae4e;
   --chat-bg: #d5e3c7;
   --chat-pattern: rgba(255, 255, 255, 0.35);
+  --pinned-bg: #f1f2f6;
+  --settings-bg: #f1f2f6;
+  --switch-off: rgba(0, 0, 0, 0.12);
   --nav-h: 58px;
   --safe-b: env(safe-area-inset-bottom, 0px);
   --safe-t: env(safe-area-inset-top, 0px);
   color-scheme: light;
 }
 
-:root[data-theme='dark'] {
+/* Тёмная тема: по системе, по выбору встраивающей страницы (data-theme) или в настройках приложения (data-app-theme) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']):not([data-app-theme='light']) {
+    --bg: #000000;
+    --bg-2: #1c1c1e;
+    --card: #1c1c1e;
+    --text: #f2f2f7;
+    --muted: #8e8e93;
+    --border: rgba(255, 255, 255, 0.1);
+    --bubble-in: #212d3b;
+    --bubble-out: #2b5278;
+    --bubble-out-meta: #7eb6e8;
+    --chat-bg: #0e1621;
+    --chat-pattern: rgba(255, 255, 255, 0.03);
+    --pinned-bg: #111113;
+    --settings-bg: #000000;
+    --switch-off: #39393d;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme='dark']:not([data-app-theme='light']),
+:root[data-app-theme='dark'] {
   --bg: #000000;
   --bg-2: #1c1c1e;
   --card: #1c1c1e;
@@ -31,6 +56,9 @@
   --bubble-out-meta: #7eb6e8;
   --chat-bg: #0e1621;
   --chat-pattern: rgba(255, 255, 255, 0.03);
+  --pinned-bg: #111113;
+  --settings-bg: #000000;
+  --switch-off: #39393d;
   color-scheme: dark;
 }
 
@@ -501,16 +529,12 @@ video {
   display: flex;
 }
 
-.stories-pill-avatars img {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  object-fit: cover;
+.stories-pill-avatars .avatar {
   border: 2px solid #d62976;
   margin-left: -8px;
 }
 
-.stories-pill-avatars img:first-child {
+.stories-pill-avatars .avatar:first-child {
   margin-left: 0;
 }
 
@@ -1513,11 +1537,7 @@ video {
 }
 
 .chat-row.pinned {
-  background: var(--bg-2);
-}
-
-:root[data-theme='dark'] .chat-row.pinned {
-  background: #111113;
+  background: var(--pinned-bg);
 }
 
 .chat-row:active {
@@ -2204,12 +2224,7 @@ video {
 
 .settings,
 .settings .page-header {
-  background: var(--bg-2);
-}
-
-:root[data-theme='dark'] .settings,
-:root[data-theme='dark'] .settings .page-header {
-  background: #000;
+  background: var(--settings-bg);
 }
 
 .group {
@@ -2306,16 +2321,12 @@ video {
   width: 50px;
   height: 30px;
   border-radius: 15px;
-  background: var(--border);
+  background: var(--switch-off);
   position: relative;
   cursor: pointer;
   transition: background 0.2s;
   flex-shrink: 0;
   margin: 0;
-}
-
-:root[data-theme='dark'] .switch {
-  background: #39393d;
 }
 
 .switch::after {
@@ -2331,8 +2342,7 @@ video {
   transition: transform 0.2s;
 }
 
-.switch:checked,
-:root[data-theme='dark'] .switch:checked {
+.switch:checked {
   background: #34c759;
 }
 

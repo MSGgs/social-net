@@ -6,7 +6,9 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "media:demo": "python3 scripts/gen-demo-media.py",
+    "build:demo": "tsc && vite build --mode demo --base ./ --outDir dist-demo"
   },
   "repository": {
     "type": "git",

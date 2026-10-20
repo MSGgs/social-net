@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useState } from 'react';
 import { Plus, Volume2, VolumeX } from 'lucide-react';
+import { Avatar } from '../components/Avatar';
 import { VerticalFeed } from '../components/VerticalFeed';
 import { StoriesBar, hasUnseen, useStoryQueue } from '../components/StoriesBar';
 import { ME_ID, useStore } from '../store/useStore';
@@ -96,7 +97,7 @@ export function FeedPage({ active }: { active: boolean }) {
             <button className="stories-pill" onClick={() => setStoriesOpen(true)}>
               <span className="stories-pill-avatars">
                 {unseen.map((s) => (
-                  <img key={s.authorId} src={users[s.authorId]?.avatar} alt="" />
+                  <Avatar key={s.authorId} src={users[s.authorId]?.avatar} name={users[s.authorId]?.name} size={26} />
                 ))}
               </span>
               Истории
