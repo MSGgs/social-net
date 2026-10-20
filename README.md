@@ -36,6 +36,13 @@ npm run build    # проверка типов + production-сборка в dist
 
 Лучше всего смотреть с телефона или в режиме мобильного устройства в DevTools. На десктопе приложение показывается в рамке телефона.
 
+Автономное демо без внешних сервисов (фото и видео генерируются локально, нужны Python с Pillow и numpy и ffmpeg):
+
+```bash
+npm run media:demo   # иллюстрации и ролики в public/media
+npm run build:demo   # сборка в dist-demo/, открывается с любого статического хостинга
+```
+
 ## Стек
 
 React 19 + TypeScript, Vite, React Router, Zustand (с persist), lucide-react. Без UI-фреймворков: стили в `src/index.css` на CSS-переменных.
