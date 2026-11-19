@@ -1,5 +1,11 @@
 import type { Chat, Message, User } from '../types';
 
+/** Абсолютная ссылка на экран приложения с учётом базового пути сайта */
+export function appLink(path: string) {
+  const base = import.meta.env.BASE_URL.startsWith('/') ? location.origin + import.meta.env.BASE_URL : location.href;
+  return new URL(path.replace(/^\//, ''), base).href;
+}
+
 export const uid = () => Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
 
 /** Русские формы множественного числа: plural(5, ['комментарий', 'комментария', 'комментариев']) */

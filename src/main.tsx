@@ -4,13 +4,20 @@ import { BrowserRouter, MemoryRouter } from 'react-router-dom';
 import { App } from './App';
 import './index.css';
 
-// Встроенные превью не меняют адресную строку — там маршруты держим в памяти
-const Router = import.meta.env.VITE_ROUTER === 'memory' ? MemoryRouter : BrowserRouter;
+// Встроенные превью не меняют адресную строку — там маршруты держим в памяти.
+// На GitHub Pages сайт живёт в подпапке (/social-net/), её отдаём роутеру как basename.
+const basename = import.meta.env.BASE_URL.replace(/\/$/, '') || undefined;
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <Router>
-      <App />
-    </Router>
+    {import.meta.env.VITE_ROUTER === 'memory' ? (
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>
+    ) : (
+      <BrowserRouter basename={basename}>
+        <App />
+      </BrowserRouter>
+    )}
   </StrictMode>,
 );

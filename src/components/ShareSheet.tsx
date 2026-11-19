@@ -4,7 +4,7 @@ import { Sheet } from './Sheet';
 import { Avatar } from './Avatar';
 import { useStore } from '../store/useStore';
 import { useUI } from '../store/useUI';
-import { chatAvatar, chatTitle } from '../utils/format';
+import { appLink, chatAvatar, chatTitle } from '../utils/format';
 
 export function ShareSheet() {
   const postId = useUI((s) => s.sharePostId);
@@ -59,7 +59,7 @@ export function ShareSheet() {
           <button
             className="btn secondary"
             onClick={() => {
-              navigator.clipboard?.writeText(`${location.origin}/post/${postId}`).catch(() => {});
+              navigator.clipboard?.writeText(appLink(`/post/${postId}`)).catch(() => {});
               toast('Ссылка скопирована');
               close();
             }}

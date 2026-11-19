@@ -7,7 +7,7 @@ import { PostGrid } from '../components/PostGrid';
 import { hasUnseen } from '../components/StoriesBar';
 import { ME_ID, useStore } from '../store/useStore';
 import { useUI } from '../store/useUI';
-import { compact, presence } from '../utils/format';
+import { appLink, compact, presence } from '../utils/format';
 
 /** Профиль другого пользователя: контакта или автора */
 export function UserPage() {
@@ -107,7 +107,7 @@ export function UserPage() {
             label: 'Скопировать ссылку',
             icon: <Link2 size={20} />,
             onClick: () => {
-              navigator.clipboard?.writeText(`${location.origin}/u/${id}`).catch(() => {});
+              navigator.clipboard?.writeText(appLink(`/u/${id}`)).catch(() => {});
               toast('Ссылка скопирована');
             },
           },
