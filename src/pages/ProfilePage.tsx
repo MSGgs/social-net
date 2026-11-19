@@ -5,7 +5,7 @@ import { PostGrid } from '../components/PostGrid';
 import { useStoryQueue } from '../components/StoriesBar';
 import { ME_ID, useMe, useStore } from '../store/useStore';
 import { useUI } from '../store/useUI';
-import { compact } from '../utils/format';
+import { appLink, compact } from '../utils/format';
 
 type Tab = 'posts' | 'videos' | 'saved';
 
@@ -82,7 +82,7 @@ export function ProfilePage() {
           <button
             className="btn secondary"
             onClick={() => {
-              navigator.clipboard?.writeText(`${location.origin}/u/${ME_ID}`).catch(() => {});
+              navigator.clipboard?.writeText(appLink(`/u/${ME_ID}`)).catch(() => {});
               toast('Ссылка на профиль скопирована');
             }}
           >

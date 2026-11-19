@@ -24,14 +24,10 @@ function useTheme() {
   const accent = useStore((s) => s.settings.accent);
 
   useEffect(() => {
-    const media = window.matchMedia('(prefers-color-scheme: dark)');
-    const apply = () => {
-      const dark = theme === 'dark' || (theme === 'system' && media.matches);
-      document.documentElement.dataset.theme = dark ? 'dark' : 'light';
-    };
-    apply();
-    media.addEventListener('change', apply);
-    return () => media.removeEventListener('change', apply);
+    // «Системная» — ничего не задаём: решают prefers-color-scheme и data-theme встраивающей страницы
+    const root = document.documentElement;
+    if (theme === 'system') delete root.dataset.appTheme;
+    else root.dataset.appTheme = theme;
   }, [theme]);
 
   useEffect(() => {

@@ -6,7 +6,7 @@ import { Sheet } from '../components/Sheet';
 import { StoriesBar, hasUnseen } from '../components/StoriesBar';
 import { useStore } from '../store/useStore';
 import { useUI } from '../store/useUI';
-import { compact, presence } from '../utils/format';
+import { appLink, compact, presence } from '../utils/format';
 
 export function ContactsPage() {
   const navigate = useNavigate();
@@ -71,7 +71,7 @@ export function ContactsPage() {
             <button
               className="list-item"
               onClick={() => {
-                navigator.share?.({ title: 'Волна', text: 'Присоединяйся ко мне в Волне!', url: location.origin }).catch(() => {});
+                navigator.share?.({ title: 'Волна', text: 'Присоединяйся ко мне в Волне!', url: appLink('/') }).catch(() => {});
                 toast('Ссылка-приглашение готова');
               }}
             >
